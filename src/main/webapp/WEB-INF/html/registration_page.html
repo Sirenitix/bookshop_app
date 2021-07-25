@@ -29,7 +29,12 @@
         <input class="registration_item" type="password" placeholder="password" th:field="*{password_second}">
         <br>
         <input class="registration_item" type="submit" value="Register">
+        <input href="/2_module_home_work_war_exploded/login" type="submit" value="Back to login page">
     </form>
+
+    <td th:if="${passerror == true}" >
+        <p>Passwords not equal!</p>
+    </td>
 </div>
 </body>
 </html>

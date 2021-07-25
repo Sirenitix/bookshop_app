@@ -71,6 +71,7 @@ public class BookShelfController{
             model.addAttribute("docs",docService.getAllDocs());
             model.addAttribute("doc", new Doc());
             return "book_shelf";
+
         } else {
             bookService.saveBook(book);
             logger.info("current repository size: " + bookService.getAllBooks().size());
@@ -154,8 +155,8 @@ public class BookShelfController{
         model.addAttribute("bookTagToFind", new BookTagToFind());
         model.addAttribute("bookList", bookService.getAllBooks());
         model.addAttribute("docs", docService.getAllDocs());
-        model.addAttribute("error", true);
         model.addAttribute("doc", new Doc());
+        model.addAttribute("error", true);
         return "book_shelf";
     }
 

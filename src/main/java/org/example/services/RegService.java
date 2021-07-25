@@ -1,6 +1,5 @@
 package org.example.services;
 
-import org.example.entity.Book;
 import org.example.entity.RegisForm;
 import org.example.repository.NewUserInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ public class RegService {
         this.regRepo = regRepo;
     }
 
-    public void saveBook(RegisForm regisForm) {
+    public void saveUser(RegisForm regisForm) {
         regRepo.store(regisForm);
     }
     public List<RegisForm> getAllUsers() {

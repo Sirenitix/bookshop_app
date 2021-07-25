@@ -29,11 +29,16 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("regisFrom") RegisForm regisForm, BindingResult bindingResult) {
+    public String registration(@ModelAttribute("regisFrom") RegisForm regisForm, BindingResult bindingResult,Model model) {
+        if(!regisForm.getPassword_first().equals(regisForm.getPassword_second())){
+            model.addAttribute("regisForm", new RegisForm());
+            model.addAttribute("passerror", true);
+            return "registration_page";
+        }
         if (bindingResult.hasErrors()) {
             return "registration_page";
         }
-        regService.saveBook(regisForm);
+        regService.saveUser(regisForm);
         regService.setAut(regisForm);
         logger.debug("Welcome: " + regService.getAllUsers());
 

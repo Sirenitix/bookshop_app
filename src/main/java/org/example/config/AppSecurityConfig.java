@@ -28,11 +28,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
       logger.info("populate inmemory authentification");
-//      auth
-//              .inMemoryAuthentication()
-//              .withUser("root")
-//              .password(passwordEncoder().encode("123"))
-//              .roles("USER");
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .usersByUsernameQuery("select username, password, enabled"
