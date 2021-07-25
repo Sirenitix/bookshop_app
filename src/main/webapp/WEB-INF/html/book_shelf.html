@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <meta charset="UTF-8">
+    <title>My book shelf</title>
+    <style>
+        #root_container {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #books {
+            width: 50%;
+            border-collapse: collapse;
+        }
+
+        table {
+            margin: 25px;
+        }
+
+        th {
+            text-align: left;
+
+        }
+
+        th, td {
+            border-bottom: 1px solid #ddd;
+            padding: 4px;
+
+        }
+        p {
+            color: crimson;
+            margin-left: 5%;
+        }
+    </style>
+</head>
+<body>
+<div id="root_container">
+    <form method="post" th:action="@{/books/save}" th:object="${book}">
+        <table>
+            <tr>
+
+                <td>
+                    <input type="text" placeholder="author" th:field="*{author}">
+                </td>
+
+                <td >
+                    <input type="text" placeholder="book_title" th:field="*{title}">
+                </td>
+
+                <td>
+                    <input type="text" placeholder="size (pages)" th:field="*{size}">
+                </td>
+
+                <td>
+                    <input type="submit" value="save">
+                </td>
+
+            </tr>
+        </table>
+        <p th:if="${#fields.hasErrors('author')}"> author field value must contain only letters</p>
+        <p th:if="${#fields.hasErrors('title')}"> title field must be filled</p>
+        <p th:if="${#fields.hasErrors('size')}"> size field value must be number and contain only 4 digits</p>
+    </form>
+
+    <form action="#" method="post" th:action="@{/books/remove}" th:object="${bookTagToRemove}">
+        <table>
+            <tr>
+
+                <td>
+                    <input type="text" placeholder="id or title or author" th:field="*{tag}">
+                </td>
+
+                <td>
+                    <input type="submit" value="remove">
+                </td>
+
+            </tr>
+        </table>
+        <td th:if="${#fields.hasAnyErrors()}" >
+            <p>Empty field!</p>
+        </td>
+    </form>
+
+    <form action="#" method="post" th:action="@{/books/search}" th:object="${bookTagToFind}">
+        <table>
+            <tr>
+
+                <td>
+                    <input type="text" placeholder="seach field" th:field="*{findbook}">
+                </td>
+
+                <td>
+                    <input type="submit" value="search">
+                </td>
+
+            </tr>
+        </table>
+        <td th:if="${#fields.hasAnyErrors()}" >
+            <p>Empty field!</p>
+        </td>
+    </form>
+
+    <form method="post" th:action="@{/books/clear}">
+        <table>
+        <tr>
+
+            <td>
+                <input type="submit" value="clear">
+            </td>
+
+        </tr>
+        </table>
+    </form>
+    <table id="books">
+        <tr>
+            <th>id</th>
+            <th>author</th>
+            <th>title</th>
+            <th>size</th>
+        </tr>
+        <tr th:each="book : ${bookList}">
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.size}"></td>
+        </tr>
+    </table>
+    <form id="uploadfiles" name="uploadfiles" method="post" th:action="@{/books/uploadfile}" enctype="multipart/form-data">
+        <table>
+            <tr>
+
+                <td>
+                    <input type="file" name="file"/>
+                </td>
+
+                <td>
+                    <input type="submit" value="Upload and update page">
+                </td>
+
+            </tr>
+        </table>
+        <td th:if="${error == true}" >
+            <p>Empty field!</p>
+        </td>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Link</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="doc:${docs}">
+            <td th:text="${doc.id}"> </td>
+            <td th:text="${doc.fileName}"></td>
+            <td><a th:href="@{'/books/downloadFile/'+${doc.id}}" class="btn btn-dark">Download</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    </div>
+
+
+
+
+</body>
+</html>

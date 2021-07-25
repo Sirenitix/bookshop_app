@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Custom 500</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Anton");
+        body {
+            padding: 60px;
+            background-color: orange;
+            font-family: "Anton", sans-serif;
+            text-transform: uppercase;
+        }
+        body h1 {
+            font-size: 5vw;
+            margin: 0;
+            line-height: 1.25;
+        }
+        body h1 p {
+            font-size: 10vw;
+            margin: 0 0 10px;
+        }
+
+        a {
+            margin-top: 30px;
+            margin-right: 30px;
+            border: 5px solid black;
+            padding: 30px;
+            text-decoration: none;
+            display: inline-block;
+            color: black;
+            line-height: 1;
+            letter-spacing: 1px;
+            font-size: 20px;
+            transition: 0.25s linear;
+        }
+        a:hover {
+            transform: translate(-10px, -10px);
+            box-shadow: 10px 10px 0 black;
+        }
+        a:hover span::before {
+            top: 100%;
+        }
+
+        span {
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+        }
+        span::before {
+            content: "";
+            background-color: black;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: 0.25s ease;
+        }
+        span:hover:before {
+            top: 100%;
+        }
+    </style>
+</head>
+<body>
+<h1>
+<p>ERROR 500</p>
+    Congratulations, you broke the <span>fucking</span> site. I bet you are waiting for us to tell you what happened, well basically you did something no one liked, so <span>fuck you</span><br /><br />Thanks for breaking the site, sincerely <span>Fuck you</span>
+</h1><a href="/"> <span>fuck</span> off back home</a><a href="/">Tell us it's broke you smug little <span>shit</span></a>
+</body>
+</html>
