@@ -105,7 +105,7 @@ public class DocRepository extends Component implements DocInterface<Doc>, Appli
                     dir.mkdirs();
                 }
 
-                File serverFile = new File(dir.getAbsolutePath() + File.separator + name);
+                File serverFile = new File(dir.getAbsolutePath() + File.separator + htmlUnescape(name));
                 try {
                     BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
                     stream.write(bytes);
